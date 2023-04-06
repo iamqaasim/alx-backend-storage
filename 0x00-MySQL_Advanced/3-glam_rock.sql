@@ -1,5 +1,12 @@
--- This SQL script select band_name, and lifespan column which is difference
-SELECT band_name, (IF NULL(split, '2020') - formed) AS lifespan
-    FROM metal_bands
-    WHERE FIND_IN_SET('Glam rock', IF NULL(style, "")) > 0
-    ORDER BY lifespan DESC;
+SELECT 
+    band_name, 
+    YEAR(MAX(split)) - YEAR(MIN(formed)) AS lifespan 
+FROM 
+    metal_bands 
+WHERE 
+    style LIKE '%Glam rock%' 
+GROUP BY 
+    band_name 
+ORDER BY 
+    lifespan DESC;
+
