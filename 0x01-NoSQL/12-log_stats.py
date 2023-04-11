@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from pymongo import MongoClient
+
 METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"]
 
 def log_stats(mongo_collection, option=None):
