@@ -8,8 +8,10 @@ from functools import wraps
 
 store = redis.Redis()
 
+
 def count_url_access(method):
-    """ Decorator counting how many times a URL is accessed """
+    """ Decorator counting how many times
+    a URL is accessed """
     @wraps(method)
     def wrapper(url):
         cached_key = "cached:" + url
@@ -25,6 +27,7 @@ def count_url_access(method):
         store.expire(cached_key, 10)
         return html
     return wrapper
+
 
 @count_url_access
 def get_page(url: str) -> str:
